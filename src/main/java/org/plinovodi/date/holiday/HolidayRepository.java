@@ -1,4 +1,4 @@
-package org.plinovodi;
+package org.plinovodi.date.holiday;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -1,12 +1,14 @@
-package org.plinovodi;
+package org.plinovodi.date;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import lombok.RequiredArgsConstructor;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -17,16 +19,16 @@ import static org.springframework.http.HttpStatus.OK;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(path = "")
-public class CoreController {
+@RequestMapping(path = "date")
+public class DateController {
 
-	private final CoreService service;
+	private final DateService dateService;
 
 	@GetMapping(path = "holiday")
-	public ResponseEntity<?> getAllHolidays () {
+	public ResponseEntity<?> getHoliday () {
 		try {
 			return ResponseEntity.status(OK).body(
-				service.getAllHolidays()
+				dateService.getAllHolidays()
 			);
 		}
 		catch (Exception exception) {
@@ -36,20 +38,20 @@ public class CoreController {
 		}
 	}
 
-	@GetMapping(path = "query")
-	public ResponseEntity<?> getQuery (
-		@RequestParam(name = "date", required = false)
+	@GetMapping(path = "/{date}")
+	public ResponseEntity<?> getDateType (
+		@PathVariable
 		@DateTimeFormat(iso = DateTimeFormat.ISO.DATE, pattern = "yyyy-MM-dd")
 		LocalDate date
 	) {
 		try {
 			return ResponseEntity.status(OK).body(
-				service.getDayType(date)
+				dateService.getDateType(date)
 			);
 		}
 		catch (DateTimeException exception) {
 			return ResponseEntity.status(BAD_REQUEST).body(
-				"No query found : use [/?date=yyyy-mm-dd] to check for day type."
+				"Date format error, use format : /query?date=yyyy-MM-dd"
 			);
 		}
 		catch (Exception exception) {

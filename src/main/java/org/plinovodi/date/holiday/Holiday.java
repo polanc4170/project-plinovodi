@@ -1,4 +1,4 @@
-package org.plinovodi;
+package org.plinovodi.date.holiday;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,5 +30,10 @@ public class Holiday {
 
 	@Column(nullable = false, unique = false)
 	private String name;
+
+	public Holiday (LocalDate localDate, String name) {
+		setLocalDate(localDate);
+		setName(name);
+	}
 
 }

@@ -1,0 +1,52 @@
+<!-- 					 -->
+<!-- CONTENT			 -->
+<!-- 					 -->
+
+<div class = "container">
+
+	<!-- 					 -->
+	<!-- HEADING			 -->
+	<!-- 					 -->
+
+	<div class = "text-center">
+		<h1><b>Holiday</b></h1>
+	</div>
+
+	<!-- 					 -->
+	<!-- BREAK				 -->
+	<!-- 					 -->
+
+	<br>
+	<br>
+
+	<!-- 					 -->
+	<!-- TABLE				 -->
+	<!-- 					 -->
+
+	<table class = "table">
+
+		<!-- 					 -->
+		<!-- HEAD				 -->
+		<!-- 					 -->
+
+		<thead class = "thead-dark">
+			<tr>
+				<th scope = "col">Date</th>
+				<th scope = "col">Name</th>
+			</tr>
+		</thead>
+
+		<!-- 					 -->
+		<!-- BODY				 -->
+		<!-- 					 -->
+
+		<tbody>
+			<tr *ngFor = "let holiday of holidays">
+				<td>{{holiday.date}}</td>
+				<td>{{holiday.name}}</td>
+			</tr>
+		</tbody>
+
+	</table>
+
+</div>
