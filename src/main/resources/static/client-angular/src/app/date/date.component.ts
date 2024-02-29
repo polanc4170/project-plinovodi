@@ -34,7 +34,7 @@ export class DateComponent {
 		private dateService     : DateService
 	) {}
 
-	queryDate () {
+	public queryDate () {
 		if (this.activeDate) {
 			const date = this.activeDate.toISOString().split('T')[0];
 
@@ -44,9 +44,12 @@ export class DateComponent {
 
 			this.router.navigate([], {
 				relativeTo          : this.routerActivated,
-				queryParams         : { 'date' : date },
+				queryParams         : { 'selected' : date },
 				queryParamsHandling : 'merge'
-			})
+			});
+		}
+		else {
+			console.log("The query date is null.");
 		}
 	}
 

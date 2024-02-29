@@ -20,7 +20,7 @@ export class HolidayComponent implements OnInit {
 		];
 	}
 
-	ngOnInit () {
+	public ngOnInit () {
 		this.dateService.getHolidays().subscribe((data : Holiday []) => {
 			this.holidays = data;
 		})

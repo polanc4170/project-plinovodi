@@ -13,7 +13,7 @@ export class DateService {
 	private readonly serviceURL   : string;
 
 	constructor (private http : HttpClient) {
-		this.componentURL = `/date`;
+		this.componentURL = `date`;
 		this.serviceURL   = `${serverURL}/${this.componentURL}`;
 	}
 
