@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS holiday CASCADE;
+
+CREATE TABLE holiday (
+	id			BIGSERIAL		NOT NULL,
+	local_date	DATE			NOT NULL,
+	name		VARCHAR(255)	NOT NULL,
+	PRIMARY KEY (id)
+);
