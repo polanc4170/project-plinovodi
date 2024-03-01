@@ -1,4 +1,4 @@
-package org.plinovodi.date.holiday;
+package org.plinovodi.user.intervention;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,19 +12,19 @@ import static org.springframework.http.HttpStatus.OK;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(path = "date/holiday")
-public class HolidayController {
+@RequestMapping("user/intervention")
+public class InterventionController {
 
-	private final HolidayService holidayService;
+	private final InterventionService interventionService;
 
 	@GetMapping(
 		path     = "",
 		produces = "application/json"
 	)
-	public ResponseEntity<?> getHoliday () {
+	public ResponseEntity<?> getInterventions () {
 		try {
 			return ResponseEntity.status(OK).body(
-				holidayService.getHolidays()
+				interventionService.getInterventions()
 			);
 		}
 		catch (Exception exception) {

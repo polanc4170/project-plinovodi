@@ -3,7 +3,7 @@ package org.plinovodi.user.intervention;
 import org.springframework.stereotype.Component;
 
 @Component
-public class InterventionMapping {
+public class InterventionMapper {
 
 	public InterventionDTO toInterventionDTO (Intervention intervention) {
 		return new InterventionDTO(

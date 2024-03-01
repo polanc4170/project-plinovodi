@@ -2,7 +2,7 @@ package org.plinovodi.user.form;
 
 import org.plinovodi.user.intervention.Intervention;
 import org.plinovodi.user.intervention.InterventionDTO;
-import org.plinovodi.user.intervention.InterventionMapping;
+import org.plinovodi.user.intervention.InterventionMapper;
 import org.plinovodi.user.intervention.InterventionService;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +17,9 @@ import java.util.Optional;
 public class FormService {
 
 	private final InterventionService interventionService;
-	private final InterventionMapping interventionMapping;
+	private final InterventionMapper interventionMapper;
 	private final FormRepository      formRepository;
-	private final FormMapping         formMapping;
+	private final FormMapper formMapper;
 
 	public FormDTO postForm (FormDTO formDTO) {
 		Optional<Form> dbOptUserForm = formRepository.findByUUID(formDTO.uuid());
@@ -28,7 +28,7 @@ public class FormService {
 			throw new RuntimeException("");
 		}
 
-		formRepository.save(formMapping.toForm(formDTO));
+		formRepository.save(formMapper.toForm(formDTO));
 
 		return formDTO;
 	}
@@ -36,7 +36,7 @@ public class FormService {
 	public List<FormDTO> getForms () {
 		return formRepository.findAll()
 			.stream()
-			.map(formMapping::toFormDTO)
+			.map(formMapper::toFormDTO)
 			.toList();
 	}
 
@@ -47,7 +47,7 @@ public class FormService {
 			throw new RuntimeException("");
 		}
 
-		return formMapping.toFormDTO(
+		return formMapper.toFormDTO(
 			dbOptUserForm.get()
 		);
 	}
@@ -89,17 +89,17 @@ public class FormService {
 
 			List<Intervention> formInterventions = interventionList
 				.stream()
-				.map(interventionMapping::toIntervention)
+				.map(interventionMapper::toIntervention)
 				.toList();
 
 			interventions.addAll(formInterventions);
 			dbUserForm.setInterventionList(interventions);
 
-			interventionService.postInterventions(formInterventions);
+			interventionService.postInterventions(interventionList);
 			formRepository.save(dbUserForm);
 		}
 
-		return formMapping.toFormDTO(dbUserForm);
+		return formMapper.toFormDTO(dbUserForm);
 	}
 
 }

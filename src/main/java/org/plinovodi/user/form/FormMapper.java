@@ -1,9 +1,15 @@
 package org.plinovodi.user.form;
 
+import org.plinovodi.user.intervention.InterventionMapper;
 import org.springframework.stereotype.Component;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Component
-public class FormMapping {
+public class FormMapper {
+
+	private final InterventionMapper interventionMapper;
 
 	public FormDTO toFormDTO (Form userForm) {
 		return new FormDTO(
@@ -11,7 +17,10 @@ public class FormMapping {
 			userForm.getFirstName(),
 			userForm.getLastName(),
 			userForm.getLocalDate(),
-			null
+			userForm.getInterventionList()
+				.stream()
+				.map(interventionMapper::toInterventionDTO)
+				.toList()
 		);
 	}
 
@@ -22,7 +31,10 @@ public class FormMapping {
 			formDTO.firstName(),
 			formDTO.lastName(),
 			formDTO.localData(),
-			null
+			formDTO.interventionList()
+				.stream()
+				.map(interventionMapper::toIntervention)
+				.toList()
 		);
 	}
 
