@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Repository
 public interface HolidayRepository extends JpaRepository<Holiday, Long> {
 
-	@Query("SELECT COUNT(h) > 0 FROM Holiday h WHERE h.localDate = ?1")
+	@Query("SELECT COUNT(x) > 0 FROM Holiday x WHERE x.localDate = ?1")
 	boolean hasHolidayForDate (LocalDate date);
 
 }

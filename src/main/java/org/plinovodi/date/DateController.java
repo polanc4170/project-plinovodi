@@ -23,21 +23,10 @@ public class DateController {
 
 	private final DateService dateService;
 
-	@GetMapping(path = "holiday")
-	public ResponseEntity<?> getHoliday () {
-		try {
-			return ResponseEntity.status(OK).body(
-				dateService.getAllHolidays()
-			);
-		}
-		catch (Exception exception) {
-			return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(
-				"Unhandled exception."
-			);
-		}
-	}
-
-	@GetMapping(path = "/{date}")
+	@GetMapping(
+		path     = "/{date}",
+		produces = "application/json"
+	)
 	public ResponseEntity<?> getDateType (
 		@PathVariable
 		@DateTimeFormat(iso = DateTimeFormat.ISO.DATE, pattern = "yyyy-MM-dd")
@@ -50,12 +39,12 @@ public class DateController {
 		}
 		catch (DateTimeException exception) {
 			return ResponseEntity.status(BAD_REQUEST).body(
-				"Date format error, use format : /query?date=yyyy-MM-dd"
+				exception.getMessage()
 			);
 		}
 		catch (Exception exception) {
 			return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(
-				"Unhandled exception."
+				exception.getMessage()
 			);
 		}
 	}
