@@ -14,7 +14,8 @@ INSERT INTO holiday (local_date, name) VALUES
 
 INSERT INTO user_form (id, uuid, first_name, last_name, local_date) VALUES
 (1, 1, 'Janez', 'Novak', '2024-02-05'),
-(2, 2, 'Peter', 'Svete', '2024-02-12');
+(2, 2, 'Peter', 'Svete', '2024-02-12'),
+(3, 3, 'Mirko', 'Petek', '2024-02-19');
 
 INSERT INTO user_intervention (id, uuid, local_date, hour_start, hour_end, desc_short, desc_long) VALUES
 (1, 1, '2024-02-06', 10, 14, 'Main gas pipe broken.', 'Main gas pipe broken with long description.'),

@@ -9,8 +9,8 @@ public record FormDTO(
 	String uuid,
 	String firstName,
 	String lastName,
-	LocalDate localData,
-	List <InterventionDTO> interventionList
+	LocalDate localDate,
+	List<InterventionDTO> interventionList
 ) {
 
 }

@@ -33,7 +33,7 @@ public class UserService {
 	private final DateService dateService;
 
 	private Map<String, Object> getOnCallHoursFor (FormDTO formDTO) {
-		LocalDate localDate = formDTO.localData();
+		LocalDate localDate = formDTO.localDate();
 
 		int weekdays = 0;
 		int weekends = 0;

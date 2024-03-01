@@ -8,8 +8,13 @@ public enum DateType {
 
 	public final String label;
 
-	private DateType (String label) {
+	DateType (String label) {
 		this.label = label;
+	}
+
+	@Override
+	public String toString () {
+		return label;
 	}
 
 }

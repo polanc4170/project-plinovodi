@@ -30,7 +30,7 @@ public class FormMapper {
 			formDTO.uuid(),
 			formDTO.firstName(),
 			formDTO.lastName(),
-			formDTO.localData(),
+			formDTO.localDate(),
 			formDTO.interventionList()
 				.stream()
 				.map(interventionMapper::toIntervention)
