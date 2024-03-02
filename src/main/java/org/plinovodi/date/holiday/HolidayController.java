@@ -21,7 +21,7 @@ public class HolidayController {
 		path     = "",
 		produces = "application/json"
 	)
-	public ResponseEntity<?> getHoliday () {
+	public ResponseEntity<?> getHolidays () {
 		try {
 			return ResponseEntity.status(OK).body(
 				holidayService.getHolidays()
