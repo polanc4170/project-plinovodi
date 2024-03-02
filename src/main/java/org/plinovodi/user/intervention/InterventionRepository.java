@@ -11,11 +11,11 @@ import java.util.Optional;
 @Repository
 public interface InterventionRepository extends JpaRepository<Intervention, Long> {
 
-	@Query("SELECT x FROM Intervention x WHERE x.localDate = ?1")
-	List<Intervention> findByDate (LocalDate localDate);
+	@Query("SELECT x FROM Intervention x WHERE x.dateStart = ?1")
+	List<Intervention> findByDate (LocalDate dateStart);
 
-	@Query("SELECT COUNT(x) > 0 FROM Intervention x WHERE x.localDate = ?1")
-	boolean hasByDate (LocalDate localDate);
+	@Query("SELECT COUNT(x) > 0 FROM Intervention x WHERE x.dateStart = ?1")
+	boolean hasByDate (LocalDate dateStart);
 
 	@Query("SELECT x FROM Intervention x WHERE x.uuid = ?1")
 	Optional<Intervention> findByUUID (String uuid);

@@ -1,4 +1,4 @@
-package org.plinovodi.user.form;
+package org.plinovodi.user.report;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,21 +16,21 @@ import static org.springframework.http.HttpStatus.OK;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("user/form")
-public class FormController {
+@RequestMapping("user/report")
+public class ReportController {
 
-	private final FormService formService;
+	private final ReportService reportService;
 
 	@PostMapping(
 		path     = "",
 		produces = "application/json"
 	)
-	public ResponseEntity<?> postForm (
-		@RequestBody FormDTO formDTO
+	public ResponseEntity<?> addReport (
+		@RequestBody ReportDTO reportDTO
 	) {
 		try {
 			return ResponseEntity.status(OK).body(
-				formService.postForm(formDTO)
+				reportService.addReport(reportDTO)
 			);
 		}
 		catch (Exception exception) {
@@ -44,10 +44,10 @@ public class FormController {
 		path     = "",
 		produces = "application/json"
 	)
-	public ResponseEntity<?> getForms () {
+	public ResponseEntity<?> getReports () {
 		try {
 			return ResponseEntity.status(OK).body(
-				formService.getForms()
+				reportService.getReports()
 			);
 		}
 		catch (Exception exception) {
@@ -61,12 +61,12 @@ public class FormController {
 		path     = "/{userId}",
 		produces = "application/json"
 	)
-	public ResponseEntity<?> getForm (
+	public ResponseEntity<?> getReport (
 		@PathVariable String userId
 	) {
 		try {
 			return ResponseEntity.status(OK).body(
-				formService.getForm(userId)
+				reportService.getReport(userId)
 			);
 		}
 		catch (Exception exception) {
@@ -80,13 +80,13 @@ public class FormController {
 		path     = "/{userId}",
 		produces = "application/json"
 	)
-	public ResponseEntity<?> getForm (
-		@PathVariable String uuid,
-		@RequestBody FormDTO formDTO
+	public ResponseEntity<?> updateReport (
+		@PathVariable String    uuid,
+		@RequestBody  ReportDTO reportDTO
 	) {
 		try {
 			return ResponseEntity.status(OK).body(
-				formService.putForm(uuid, formDTO)
+				reportService.updateReport(uuid, reportDTO)
 			);
 		}
 		catch (Exception exception) {

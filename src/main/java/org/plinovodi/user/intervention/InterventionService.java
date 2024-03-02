@@ -36,9 +36,10 @@ public class InterventionService {
 	}
 
 	public List<InterventionDTO> postInterventions (List<InterventionDTO> interventionDTOs) {
-		interventionDTOs.forEach(this::postIntervention);
-
-		return interventionDTOs;
+		return interventionDTOs
+			.stream()
+			.map(this::postIntervention)
+			.toList();
 	}
 
 	public List <InterventionDTO> getInterventions () {

@@ -2,10 +2,9 @@ package org.plinovodi.user;
 
 import org.plinovodi.date.DateService;
 import org.plinovodi.date.DateType;
-import org.plinovodi.user.form.FormDTO;
-import org.plinovodi.user.form.FormService;
 import org.plinovodi.user.intervention.InterventionDTO;
-
+import org.plinovodi.user.report.ReportDTO;
+import org.plinovodi.user.report.ReportService;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -13,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 @RequiredArgsConstructor
 @Service
@@ -29,11 +29,11 @@ public class UserService {
 	private static final int HOUR_WORK_START = 7;
 	private static final int HOUR_WORK_END   = 15;
 
-	private final FormService formService;
-	private final DateService dateService;
+	private final ReportService reportService;
+	private final DateService   dateService;
 
-	private Map<String, Object> getOnCallHoursFor (FormDTO formDTO) {
-		LocalDate localDate = formDTO.localDate();
+	private Map<String, Object> getOnCallHoursFor (ReportDTO reportDTO) {
+		LocalDate localDate = reportDTO.dateStart();
 
 		int weekdays = 0;
 		int weekends = 0;
@@ -52,9 +52,9 @@ public class UserService {
 		int hourWeekends = 0;
 		int hourHolidays = 0;
 
-		for (InterventionDTO interventionDTO : formDTO.interventionList()) {
+		for (InterventionDTO interventionDTO : reportDTO.interventionList()) {
 			DateType dateType = dateService.getDateType(
-				interventionDTO.localDate()
+				interventionDTO.dateStart()
 			);
 
 			int hourStart    = interventionDTO.hourStart();
@@ -85,31 +85,33 @@ public class UserService {
 		double weekend = WEEKEND_FACTOR * (weekendHours - hourWeekends) + hourWeekends;
 		double holiday = HOLIDAY_FACTOR * (holidayHours - hourHolidays) + hourHolidays;
 
-		return Map.of(
-//			"weekday-hour-intervention", (double) hourOvertime,
-//			"weekday-hour-total",        (double) weekdayHours,
-//			"weekday-value",             weekday,
-//			"weekend-hour-total",        (double) weekendHours,
-//			"weekend-hour-intervention", (double) hourWeekends,
-//			"weekend-value",             weekend,
-//			"holiday-hour-total",        (double) holidayHours,
-//			"holiday-hour-intervention", (double) hourHolidays,
-//			"holiday-value",             holiday,
-			"user-uuid",                 formDTO.uuid(),
-			"user-value",                weekday + weekend + holiday
-		);
+		Map<String, Object> map = new TreeMap<>();
+
+		map.put("weekday-hour-intervention", hourOvertime);
+		map.put("weekday-hour-total",        weekdayHours);
+		map.put("weekday-value",             weekday);
+		map.put("weekend-hour-total",        weekendHours);
+		map.put("weekend-hour-intervention", hourWeekends);
+		map.put("weekend-value",             weekend);
+		map.put("holiday-hour-total",        holidayHours);
+		map.put("holiday-hour-intervention", hourHolidays);
+		map.put("holiday-value",             holiday);
+		map.put("user-uuid",                 reportDTO.uuid());
+		map.put("user-value",                weekday + weekend + holiday);
+
+		return map;
 	}
 
-	public List <Map<String, Object>> getOnCallHoursForAll () {
-		return formService
-			.getForms()
+	public List<Map<String, Object>> getOnCallHoursForAll () {
+		return reportService
+			.getReports()
 			.stream()
 			.map(this::getOnCallHoursFor)
 			.toList();
 	}
 
 	public Map<String, Object> getOnCallHoursFor (String uuid) {
-		return getOnCallHoursFor(formService.getForm(uuid));
+		return getOnCallHoursFor(reportService.getReport(uuid));
 	}
 
 }

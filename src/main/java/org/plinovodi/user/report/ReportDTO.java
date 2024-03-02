@@ -1,15 +1,15 @@
-package org.plinovodi.user.form;
+package org.plinovodi.user.report;
 
 import org.plinovodi.user.intervention.InterventionDTO;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public record FormDTO(
+public record ReportDTO(
 	String uuid,
 	String firstName,
 	String lastName,
-	LocalDate localDate,
+	LocalDate dateStart,
 	List<InterventionDTO> interventionList
 ) {
 

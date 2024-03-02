@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,7 +21,12 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "user_intervention")
+@Table(
+	name    = "user_intervention",
+	indexes = {
+		@Index(columnList = "uuid")
+	}
+)
 public class Intervention {
 
 	@Id
@@ -32,7 +38,7 @@ public class Intervention {
 	private String uuid;
 
 	@Column(nullable = false)
-	private LocalDate localDate;
+	private LocalDate dateStart;
 
 	@Column(nullable = false)
 	private Integer hourStart;

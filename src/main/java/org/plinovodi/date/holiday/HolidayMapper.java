@@ -8,14 +8,14 @@ import lombok.NoArgsConstructor;
 @Component
 public class HolidayMapper {
 
-	public HolidayDTO toHolidayDTO (Holiday holiday) {
+	public HolidayDTO toDTO (Holiday holiday) {
 		return new HolidayDTO(
 			holiday.getLocalDate(),
 			holiday.getName()
 		);
 	}
 
-	public Holiday toHoliday (HolidayDTO holidayDTO) {
+	public Holiday toEntity (HolidayDTO holidayDTO) {
 		return new Holiday(
 			holidayDTO.localDate(),
 			holidayDTO.name()

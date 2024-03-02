@@ -8,7 +8,7 @@ public class InterventionMapper {
 	public InterventionDTO toInterventionDTO (Intervention intervention) {
 		return new InterventionDTO(
 			intervention.getUuid(),
-			intervention.getLocalDate(),
+			intervention.getDateStart(),
 			intervention.getHourStart(),
 			intervention.getHourEnd(),
 			intervention.getDescShort(),
@@ -20,7 +20,7 @@ public class InterventionMapper {
 		return new Intervention(
 			null,
 			interventionDTO.uuid(),
-			interventionDTO.localDate(),
+			interventionDTO.dateStart(),
 			interventionDTO.hourStart(),
 			interventionDTO.hourEnd(),
 			interventionDTO.descShort(),

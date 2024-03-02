@@ -13,9 +13,14 @@ import java.util.List;
 public class HolidayService {
 
 	private final HolidayRepository holidayRepository;
+	private final HolidayMapper     holidayMapper;
 
-	public List<Holiday> getHolidays () {
-		return holidayRepository.findAll();
+	public List<HolidayDTO> getHolidays () {
+		return holidayRepository
+			.findAll()
+			.stream()
+			.map(holidayMapper::toDTO)
+			.toList();
 	}
 
 	public boolean hasHolidayForDate (LocalDate localDate) {
