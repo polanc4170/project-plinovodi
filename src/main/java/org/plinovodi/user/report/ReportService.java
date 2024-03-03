@@ -22,7 +22,7 @@ public class ReportService {
 	private final ReportMapper        reportMapper;
 
 	public ReportDTO addReport (ReportDTO reportDTO) {
-		Optional<Report> dbReportOpt = reportRepository.findByUUID(reportDTO.uuid());
+		Optional<Report> dbReportOpt = reportRepository.findByID(reportDTO.id());
 
 		if (dbReportOpt.isPresent()) {
 			throw new RuntimeException("");
@@ -41,7 +41,7 @@ public class ReportService {
 	}
 
 	public ReportDTO getReport (String uuid) {
-		Optional<Report> dbReportOpt = reportRepository.findByUUID(uuid);
+		Optional<Report> dbReportOpt = reportRepository.findByID(uuid);
 
 		if (dbReportOpt.isEmpty()) {
 			throw new RuntimeException("");
@@ -53,7 +53,7 @@ public class ReportService {
 	}
 
 	public ReportDTO updateReport (String uuid, ReportDTO reportDTO) {
-		Optional<Report> dbReportOpt = reportRepository.findByUUID(uuid);
+		Optional<Report> dbReportOpt = reportRepository.findByID(uuid);
 
 		if (dbReportOpt.isEmpty()) {
 			throw new RuntimeException(String.format(
@@ -66,7 +66,7 @@ public class ReportService {
 
 		String firstName = reportDTO.firstName();
 		String lastName  = reportDTO.lastName();
-		List<InterventionDTO> interventionList = reportDTO.interventionList();
+		List<InterventionDTO> interventionList = reportDTO.interventions();
 
 		if (firstName != null && !firstName.equalsIgnoreCase(dbUserReport.getFirstName())) {
 			throw new RuntimeException(String.format(
@@ -84,7 +84,7 @@ public class ReportService {
 
 		if (interventionList != null && !interventionList.isEmpty()) {
 			List<Intervention> interventions = new ArrayList<>(
-				dbUserReport.getInterventionList()
+				dbUserReport.getInterventions()
 			);
 
 			List<Intervention> formInterventions = interventionList
@@ -93,7 +93,7 @@ public class ReportService {
 				.toList();
 
 			interventions.addAll(formInterventions);
-			dbUserReport.setInterventionList(interventions);
+			dbUserReport.setInterventions(interventions);
 
 			interventionService.postInterventions(interventionList);
 			reportRepository.save(dbUserReport);

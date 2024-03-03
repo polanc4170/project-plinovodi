@@ -17,10 +17,10 @@ public interface InterventionRepository extends JpaRepository<Intervention, Long
 	@Query("SELECT COUNT(x) > 0 FROM Intervention x WHERE x.dateStart = ?1")
 	boolean hasByDate (LocalDate dateStart);
 
-	@Query("SELECT x FROM Intervention x WHERE x.uuid = ?1")
-	Optional<Intervention> findByUUID (String uuid);
+	@Query("SELECT x FROM Intervention x WHERE x.id = ?1")
+	Optional<Intervention> findByID (String uuid);
 
-	@Query("SELECT COUNT(x) FROM Intervention x WHERE x.uuid = ?1")
-	boolean hasByUUID (String uuid);
+	@Query("SELECT COUNT(x) FROM Intervention x WHERE x.id = ?1")
+	boolean hasByUUID (String id);
 
 }

@@ -52,7 +52,7 @@ public class UserService {
 		int hourWeekends = 0;
 		int hourHolidays = 0;
 
-		for (InterventionDTO interventionDTO : reportDTO.interventionList()) {
+		for (InterventionDTO interventionDTO : reportDTO.interventions()) {
 			DateType dateType = dateService.getDateType(
 				interventionDTO.dateStart()
 			);
@@ -96,7 +96,7 @@ public class UserService {
 		map.put("holiday-hour-total",        holidayHours);
 		map.put("holiday-hour-intervention", hourHolidays);
 		map.put("holiday-value",             holiday);
-		map.put("user-uuid",                 reportDTO.uuid());
+		map.put("user-uuid",                 reportDTO.id());
 		map.put("user-value",                weekday + weekend + holiday);
 
 		return map;

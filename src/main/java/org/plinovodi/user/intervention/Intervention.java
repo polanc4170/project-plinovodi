@@ -24,18 +24,19 @@ import java.time.LocalDate;
 @Table(
 	name    = "user_intervention",
 	indexes = {
-		@Index(columnList = "uuid")
+		@Index(name = "IDX_intervention_id",   columnList = "id"),
+		@Index(name = "IDX_intervention_date", columnList = "dateStart")
 	}
 )
 public class Intervention {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long primary_key;
 
 	@NaturalId
 	@Column(nullable = false, unique = true, length = 64)
-	private String uuid;
+	private String id;
 
 	@Column(nullable = false)
 	private LocalDate dateStart;

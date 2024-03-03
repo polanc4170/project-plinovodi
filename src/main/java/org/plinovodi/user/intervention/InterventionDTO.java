@@ -3,7 +3,7 @@ package org.plinovodi.user.intervention;
 import java.time.LocalDate;
 
 public record InterventionDTO (
-	String uuid,
+	String id,
 	LocalDate dateStart,
 	Integer hourStart,
 	Integer hourEnd,

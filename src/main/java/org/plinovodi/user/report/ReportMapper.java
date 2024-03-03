@@ -13,11 +13,11 @@ public class ReportMapper {
 
 	public ReportDTO toDTO (Report userReport) {
 		return new ReportDTO(
-			userReport.getUuid(),
+			userReport.getId(),
 			userReport.getFirstName(),
 			userReport.getLastName(),
 			userReport.getDateStart(),
-			userReport.getInterventionList()
+			userReport.getInterventions()
 				.stream()
 				.map(interventionMapper::toInterventionDTO)
 				.toList()
@@ -27,11 +27,11 @@ public class ReportMapper {
 	public Report toEntity (ReportDTO reportDTO) {
 		return new Report(
 			null,
-			reportDTO.uuid(),
+			reportDTO.id(),
 			reportDTO.firstName(),
 			reportDTO.lastName(),
 			reportDTO.dateStart(),
-			reportDTO.interventionList()
+			reportDTO.interventions()
 				.stream()
 				.map(interventionMapper::toIntervention)
 				.toList()

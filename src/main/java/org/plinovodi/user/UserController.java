@@ -36,13 +36,13 @@ public class UserController {
 	}
 
 	@GetMapping(
-		path     = "{uuid}",
+		path     = "{id}",
 		produces = "application/json"
 	)
-	public ResponseEntity<?> getUserHour (@PathVariable String uuid) {
+	public ResponseEntity<?> getUserHour (@PathVariable String id) {
 		try {
 			return ResponseEntity.status(OK).body(
-				userService.getOnCallHoursFor(uuid)
+				userService.getOnCallHoursFor(id)
 			);
 		}
 		catch (Exception exception) {

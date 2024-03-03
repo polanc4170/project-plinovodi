@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,17 +19,23 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "holiday")
+@Table(
+name = "holiday",
+	indexes = {
+		@Index(name = "IDX_holiday_date", columnList = "localDate"),
+		@Index(name = "IDX_holiday_name", columnList = "name")
+	}
+)
 public class Holiday {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long primary_key;
 
 	@Column(nullable = false, unique = false)
 	private LocalDate localDate;
 
-	@Column(nullable = false, unique = false)
+	@Column(nullable = false, unique = false, length = 32)
 	private String name;
 
 	public Holiday (LocalDate localDate, String name) {

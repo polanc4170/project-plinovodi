@@ -14,10 +14,10 @@ public class InterventionService {
 	private final InterventionMapper     interventionMapper;
 
 	public InterventionDTO postIntervention (InterventionDTO interventionDTO) {
-		if (interventionRepository.hasByUUID(interventionDTO.uuid())) {
+		if (interventionRepository.hasByUUID(interventionDTO.id())) {
 			throw new RuntimeException(String.format(
-				"The intervention uuid [%s] already exists.",
-				interventionDTO.uuid()
+				"The intervention id [%s] already exists.",
+				interventionDTO.id()
 			));
 		}
 

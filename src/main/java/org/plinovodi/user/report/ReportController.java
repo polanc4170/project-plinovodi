@@ -58,15 +58,15 @@ public class ReportController {
 	}
 
 	@GetMapping(
-		path     = "/{userId}",
+		path     = "/{id}",
 		produces = "application/json"
 	)
 	public ResponseEntity<?> getReport (
-		@PathVariable String userId
+		@PathVariable String id
 	) {
 		try {
 			return ResponseEntity.status(OK).body(
-				reportService.getReport(userId)
+				reportService.getReport(id)
 			);
 		}
 		catch (Exception exception) {
@@ -77,16 +77,16 @@ public class ReportController {
 	}
 
 	@PutMapping(
-		path     = "/{userId}",
+		path     = "/{id}",
 		produces = "application/json"
 	)
 	public ResponseEntity<?> updateReport (
-		@PathVariable String    uuid,
+		@PathVariable String    id,
 		@RequestBody  ReportDTO reportDTO
 	) {
 		try {
 			return ResponseEntity.status(OK).body(
-				reportService.updateReport(uuid, reportDTO)
+				reportService.updateReport(id, reportDTO)
 			);
 		}
 		catch (Exception exception) {
